@@ -1,16 +1,13 @@
+// pages/api/historicoPerguntas.js
+
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_ANON_KEY
-);
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
 
 export default async function handler(req, res) {
   const { user_id, page = 1, limit = 10, start, end } = req.query;
 
-  if (!user_id) {
-    return res.status(400).json({ error: 'user_id é obrigatório' });
-  }
+  if (!user_id) return res.status(400).json({ error: 'user_id é obrigatório' });
 
   const offset = (page - 1) * limit;
 
